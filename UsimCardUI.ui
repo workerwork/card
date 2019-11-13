@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>UsimWriter</string>
+  </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTextBrowser" name="textBrowser_Command">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEdit_KEY">
+           <property name="maxLength">
+            <number>32</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLineEdit" name="lineEdit_SPN">
+           <property name="maxLength">
+            <number>16</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_IMSI_start">
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit_IMSI_done">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_SPN">
+           <property name="text">
+            <string>SPN(ascii)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_FPLMN">
+           <property name="text">
+            <string>FPLMNs</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_IMSI_start">
+           <property name="text">
+            <string>IMSI_start</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lineEdit_OPC">
+           <property name="maxLength">
+            <number>32</number>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEdit_FPLMN">
+           <property name="maxLength">
+            <number>27</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEdit_HPLMN">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="maxLength">
+            <number>6</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_IMSI_done">
+           <property name="text">
+            <string>IMSI_done</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_KEY">
+           <property name="text">
+            <string>KEY(hex)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_OPC">
+           <property name="text">
+            <string>OPC(hex)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_HPLMN">
+           <property name="text">
+            <string>HPLMN</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser_IMSI">
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
+        <property name="lineWrapMode">
+         <enum>QTextEdit::NoWrap</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser_Log">
+        <property name="minimumSize">
+         <size>
+          <width>256</width>
+          <height>192</height>
+         </size>
+        </property>
+        <property name="lineWrapMode">
+         <enum>QTextEdit::NoWrap</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoadCommandFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadIMSIFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuChooseMode">
+    <property name="title">
+     <string>ChooseMode</string>
+    </property>
+    <addaction name="actionSingle_IMSI"/>
+    <addaction name="separator"/>
+    <addaction name="actionBatch_IMSI"/>
+   </widget>
+   <widget class="QMenu" name="menuReadCard">
+    <property name="title">
+     <string>ReadCard</string>
+    </property>
+    <addaction name="actionReadCard"/>
+   </widget>
+   <widget class="QMenu" name="menuWriteCard">
+    <property name="title">
+     <string>WriteCard</string>
+    </property>
+    <addaction name="actionWriteCard"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuChooseMode"/>
+   <addaction name="menuReadCard"/>
+   <addaction name="menuWriteCard"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionLoadCommandFile">
+   <property name="text">
+    <string>LoadCommandFile</string>
+   </property>
+  </action>
+  <action name="actionLoadIMSIFile">
+   <property name="text">
+    <string>LoadIMSIFile</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSingle_IMSI">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Single IMSI</string>
+   </property>
+  </action>
+  <action name="actionBatch_IMSI">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Batch IMSI</string>
+   </property>
+  </action>
+  <action name="actionReadCard">
+   <property name="text">
+    <string>ReadCard</string>
+   </property>
+  </action>
+  <action name="actionWriteCard">
+   <property name="text">
+    <string>WriteCard</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>pushButton_click()</slot>
+ </slots>
+</ui>
