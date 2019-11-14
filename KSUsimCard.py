@@ -19,7 +19,7 @@ from smartcard.util import toHexString, toBytes
 
 # add by dongfeng
 
-imsi_pattern = r'12345
+imsi_pattern = r'12345'
 
 # add end
 

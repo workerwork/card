@@ -16,6 +16,12 @@ from smartcard.Exceptions import NoCardException
 from smartcard.System import readers
 from smartcard.util import toHexString, toBytes
 
+# add by dongfeng
+
+imsi_pattern = r'12345'
+
+# add end
+
 
 class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -257,6 +263,12 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             imsi = self.param_map["IMSI_start"][1]
             if len(imsi) != 15:
                 return
+            # add by dongfeng
+            pattern = re.compile(imsi_pattern)
+            if not pattern.match(imsi):
+                self.showMessageBox("imsi invalid!")
+                return
+            # and end
             newcmd = cmd[0:13]
             newcmd += imsi[0]
             newcmd += cmd[14]
@@ -401,6 +413,13 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 imsi_key_opc = re.split(" |\t|\n|\r", item)[0:3]
                 if (len(imsi_key_opc) == 0 or imsi_key_opc[0] == ""):
                     continue
+                # add by dongfeng
+                pattern = re.compile(imsi_pattern)
+                if not pattern.match(imsi_key_opc[0]):
+                    self.showMessageBox("one or more imsi(s) invalid! Please check and reload!")
+                    self.reset()
+                    return -1					
+                # add end
                 self.imsis.append(imsi_key_opc)
             self.textBrowser_IMSI.setText(self.imsisToText())
             self.setIMSITextBrowserCursor()
@@ -472,6 +491,12 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.showMessageBox("Read imsi len error!")
             exit(-1)
         imsi = s[2] + s[5] + s[4] + s[7] + s[6] + s[9] + s[8] + s[11] + s[10] + s[13] + s[12] + s[15] + s[14] + s[17] + s[16]
+        # add by dongfeng
+        pattern = re.compile(imsi_pattern)
+        if not pattern.match(imsi):
+            self.showMessageBox("imsi invalid!")
+            return
+        # add end
 
         # read hplmn
         hplmn_cmds = [
