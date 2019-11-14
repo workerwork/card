@@ -17,6 +17,12 @@ from smartcard.Exceptions import NoCardException
 from smartcard.System import readers
 from smartcard.util import toHexString, toBytes
 
+# add by dongfeng
+
+imsi_pattern = r'12345'
+
+# add end
+
 
 class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
