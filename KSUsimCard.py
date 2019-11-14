@@ -155,12 +155,6 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 i = int(self.param_map["IMSI_done"][1])
                 if i >= len(self.imsis):
                     i = len(self.imsis) - 1
-				# add by dongfeng
-                #if self.imsis[i][0] != "123456789012345":
-                #    self.showMessageBox("one or more imsi(s) invalid! Please check and reload!")
-                #    self.imsis = []
-                #    self.textBrowser_IMSI.setText(self.imsisToText())
-				# add end
                 self.param_map["IMSI_start"][1] = self.imsis[i][0]
                 self.param_map["KEY"][1] = self.imsis[i][1]
                 self.param_map["OPC"][1] = self.imsis[i][2]
