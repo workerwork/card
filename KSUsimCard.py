@@ -19,7 +19,7 @@ from smartcard.util import toHexString, toBytes
 
 # add by dongfeng
 
-imsi_pattern = r'12345'
+imsi_pattern = r'12345
 
 # add end
 
@@ -261,6 +261,12 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             imsi = self.param_map["IMSI_start"][1]
             if len(imsi) != 15:
                 return
+            # add by dongfeng
+            pattern = re.compile(imsi_pattern)
+            if not pattern.match(imsi):
+                self.showMessageBox("imsi invalid!")
+                return
+            # and end
             newcmd = cmd[0:13]
             newcmd += imsi[0]
             newcmd += cmd[14]
