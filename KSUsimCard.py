@@ -406,7 +406,7 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 if (len(imsi_key_opc) == 0 or imsi_key_opc[0] == ""):
                     continue
                 # add by dongfeng
-                pattern = re.compile(r'^12345')
+                pattern = re.compile(imsi_pattern)
                 if not pattern.match(imsi_key_opc[0]):
                     self.showMessageBox("one or more imsi(s) invalid! Please check and reload!")
                     self.reset()
@@ -483,6 +483,12 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.showMessageBox("Read imsi len error!")
             exit(-1)
         imsi = s[2] + s[5] + s[4] + s[7] + s[6] + s[9] + s[8] + s[11] + s[10] + s[13] + s[12] + s[15] + s[14] + s[17] + s[16]
+        # add by dongfeng
+        pattern = re.compile(imsi_pattern)
+        if not pattern.match(imsi):
+            self.showMessageBox("imsi invalid!")
+            return
+        # add end
 
         # read hplmn
         hplmn_cmds = [
