@@ -10,5 +10,5 @@
 
 1) 在cmd命令中输入 python -m pip install --upgrade pip 来升级pip
 2) 在cmd命令中输入 pip install pyqt5 -i https://pypi.douban.com/simple 安装pyqt5
-3) 在cmd命令中输入 pip install pyqt5-tools -i https://pypi.douban.com/simple 安装pyqt-tools
+3) 在cmd命令中输入 pip install pyqt5-tools -i https://pypi.douban.com/simple 安装pyqt5-tools
 
