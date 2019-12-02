@@ -14,4 +14,8 @@
 
 ### 在python的pyqt5包安装路径找到designer打开
 
-如果遇到msvcp140.dll找不到的错误，请安装vc++
+如果遇到msvcp140.dll找不到的错误:
+检查是否安装：Microsoft Visual C++ 2015 Redistributable(x64)
+检查是否安装：Microsoft Visual C++ 2015 Redistributable(x86)
+
+官方下载链接：www.microsoft.com
