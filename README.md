@@ -6,6 +6,10 @@
 
 在 https://www.python.org/downloads/release/python-368/ 选择对应的版本下载安装
 
+### 安装pyscard
+
+执行　pip install pyscard
+
 ### 安装pyqt5
 
 1) 在cmd命令中输入 python -m pip install --upgrade pip 来升级pip
