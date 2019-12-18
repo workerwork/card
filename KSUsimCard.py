@@ -1,4 +1,3 @@
-#coding=utf-8
 
 import sys
 import os
@@ -19,7 +18,7 @@ from smartcard.util import toHexString, toBytes
 
 # add by dongfeng
 
-imsi_pattern = r'12345'
+imsi_pattern = r'414200000000'
 
 # add end
 
@@ -489,7 +488,7 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.showMessageBox("imsi invalid!")
             return
         # add end
-
+        
         # read hplmn
         hplmn_cmds = [
             "00A4000C02 3F00",

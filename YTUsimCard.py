@@ -18,7 +18,7 @@ from smartcard.util import toHexString, toBytes
 
 # add by dongfeng
 
-imsi_pattern = r'12345'
+imsi_pattern = r'414200000000'
 
 # add end
 
@@ -470,23 +470,25 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         box.exec_()
 
     def readCard(self):
-        self.cardconn.connect()
-        #read imsi
-        imsi_cmds = [
-            ["A0A4000002 7f20", "9f17"],
-            ["A0A4000002 6f07", "9f0f"],
-            ["A0B0000009", "9000"],
-        ]
-        for cmd in imsi_cmds:
-            instruction = cmd[0].replace(" ", "")
-            print("instruction={0} {1}".format(instruction[0:10], instruction[10:]))
-            response, sw1, sw2 = self.cardconn.transmit(toBytes(instruction))
-            s = toHexString(response).replace(" ", "")
-            print("response=[{0}], sw1=[{1:02x}], sw2=[{2:02x}]".format(s, sw1, sw2))
-            sw = "{0:02x}{1:02x}".format(sw1, sw2)
-            if sw != cmd[1]:
-                self.showMessageBox("Read imsi error!")
-                exit(-1)
+        for i in range(0, 2):
+            self.initCard()
+            self.cardconn.connect()
+            #read imsi
+            imsi_cmds = [
+                ["A0A4000002 7f20", "9f17"],
+                ["A0A4000002 6f07", "9f0f"],
+                ["A0B0000009", "9000"],
+            ]
+            for cmd in imsi_cmds:
+                instruction = cmd[0].replace(" ", "")
+                print("instruction={0} {1}".format(instruction[0:10], instruction[10:]))
+                response, sw1, sw2 = self.cardconn.transmit(toBytes(instruction))
+                s = toHexString(response).replace(" ", "")
+                print("response=[{0}], sw1=[{1:02x}], sw2=[{2:02x}]".format(s, sw1, sw2))
+                sw = "{0:02x}{1:02x}".format(sw1, sw2)
+                if sw != cmd[1] and i == 1:
+                    self.showMessageBox("Read imsi error!")
+                    exit(-1)
         if len(s) != 18:
             self.showMessageBox("Read imsi len error!")
             exit(-1)
@@ -497,7 +499,7 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.showMessageBox("imsi invalid!")
             return
         # add end
-
+        
         # read hplmn
         hplmn_cmds = [
             ["A0A4000002 7f20", "9f17"],
@@ -597,32 +599,34 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return
 
     def writeCard(self):
-        self.cardconn.connect()
-        if not self.cmds:
-            return
-        if not self.batch_mode or (self.batch_mode and int(self.param_map["IMSI_done"][1]) < len(self.imsis)):
-            self.setParamMap()
-        for cmd in self.cmds:
-            subs = re.split("//", cmd[0].strip("\n\r"))
-            if len(subs) == 0:
-                continue
-            if subs[0] == '':
-                continue
-            instruction = subs[0].replace(' ', '')
-            if instruction == '':
-                continue
-            if instruction[0] == ';':
-                continue
-            if len(instruction) < 10:
-                continue
-            print("instruction={0} {1}".format(instruction[0:10], instruction[10:]))
-            response, sw1, sw2 = self.cardconn.transmit(toBytes(instruction))
-            s = toHexString(response).replace(" ", "")
-            print("response=[{0}], sw1=[{1:02x}], sw2=[{2:02x}]".format(s, sw1, sw2))
-            sw = "{0:02x}{1:02x}".format(sw1, sw2)
-            if sw != cmd[1]:
-                self.showMessageBox("Write usim error!")
-                exit(-1)
+        for i in range(0, 2):
+            self.initCard()
+            self.cardconn.connect()
+            if not self.cmds:
+                return
+            if not self.batch_mode or (self.batch_mode and int(self.param_map["IMSI_done"][1]) < len(self.imsis)):
+                self.setParamMap()
+            for cmd in self.cmds:
+                subs = re.split("//", cmd[0].strip("\n\r"))
+                if len(subs) == 0:
+                    continue
+                if subs[0] == '':
+                    continue
+                instruction = subs[0].replace(' ', '')
+                if instruction == '':
+                    continue
+                if instruction[0] == ';':
+                    continue
+                if len(instruction) < 10:
+                    continue
+                print("instruction={0} {1}".format(instruction[0:10], instruction[10:]))
+                response, sw1, sw2 = self.cardconn.transmit(toBytes(instruction))
+                s = toHexString(response).replace(" ", "")
+                print("response=[{0}], sw1=[{1:02x}], sw2=[{2:02x}]".format(s, sw1, sw2))
+                sw = "{0:02x}{1:02x}".format(sw1, sw2)
+                if sw != cmd[1] and i == 1:
+                    self.showMessageBox("Write usim error!")
+                    exit(-1)
 
         if not self.batch_mode:
             self.param_map["IMSI_done"][1] = "{0}".format(int(self.param_map["IMSI_done"][1]) + 1)
@@ -644,7 +648,7 @@ class MyWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def doAbout(self):
-        buttonReply = QMessageBox.about(self, 'About', "USIM Writer version yt2.0(2019-10-10) for internal only\n"
+        buttonReply = QMessageBox.about(self, 'About', "USIM Writer version yt2.1(2019-10-12) for internal only\n"
                                                        "Any question, please email to lezixiao@qq.com")
 
     def doExit(self):
@@ -664,7 +668,5 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myshow = MyWindow()
     myshow.show()
-    rv = myshow.initCard()
-    if rv != 0:
-        sys.exit(rv)
+
     sys.exit(app.exec_())
