@@ -25,3 +25,16 @@
 检查是否安装：Microsoft Visual C++ 2015 Redistributable(x86)
 
 官方下载链接：www.microsoft.com
+
+## 使用IDE编辑code
+
+## 打包exe文件
+
+### 安装pyinstaller
+
+执行 pip install pyinstaller
+
+### 打包
+
+执行 pyinstaller.exe -F KSUsimCard.py 生成KSUsimCard.exe
+执行 pyinstaller.exe -F YTUsimCard.py 生成YTUsimCard.exe
