@@ -37,4 +37,5 @@
 ### 打包
 
 执行 pyinstaller.exe -F KSUsimCard.py 生成KSUsimCard.exe
+
 执行 pyinstaller.exe -F YTUsimCard.py 生成YTUsimCard.exe
