@@ -24,7 +24,7 @@
 
 检查是否安装：Microsoft Visual C++ 2015 Redistributable(x86)
 
-官方下载链接：www.microsoft.com
+官方下载链接：https://www.microsoft.com/zh-cn/download/details.aspx?id=48145
 
 ## 使用IDE编辑code
 
