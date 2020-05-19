@@ -8,7 +8,7 @@
 
 ### 安装pyscard
 
-执行　pip install pyscard
+执行　python -m pip install pyscard
 
 ### 安装pyqt5
 
@@ -32,7 +32,7 @@
 
 ### 安装pyinstaller
 
-执行 pip install pyinstaller
+执行 python -m pip install pyinstaller
 
 ### 打包
 
